@@ -90,7 +90,12 @@ def check_content_sections(readme):
     ))
 
     # Check for code block with install-like commands
-    has_install_cmd = bool(re.search(r"```(?:bash|sh|shell)?\s*\n.*(npm|pip|cargo|brew|apt|yum|go\s+install|cp\s+-r|git\s+clone|docker)", text_lower))
+    # Extract all code blocks and check if any line contains install commands
+    code_blocks = re.findall(r"```(?:\w*)\s*\n(.*?)```", readme, re.DOTALL)
+    has_install_cmd = any(
+        re.search(r"(npm|pip|cargo|brew|apt|yum|go\s+install|cp\s+-r|git\s+clone|docker)", block, re.IGNORECASE)
+        for block in code_blocks
+    )
     results.append(CheckResult(
         "1.3 Install commands in code block",
         has_install_cmd,
@@ -389,7 +394,10 @@ def check_svg_files(svg_files, readme_path):
 
         # System fonts check — every font-family declaration must end with a
         # generic family keyword (sans-serif, serif, monospace, system-ui, etc.)
-        font_decls = re.findall(r'font-family=["\']([^"\']+)["\']', content)
+        # Match double-quoted and single-quoted attributes separately so that
+        # one quote type can appear inside the other (e.g. font-family="...'Segoe UI'...,")
+        font_decls = re.findall(r'font-family="([^"]*)"', content) + \
+                     re.findall(r"font-family='([^']*)'", content)
         generic_families = {"sans-serif", "serif", "monospace", "system-ui", "cursive", "fantasy"}
         all_system = True
         non_system_found = []
