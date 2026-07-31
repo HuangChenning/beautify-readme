@@ -1,6 +1,6 @@
 ---
 name: beautify-readme
-description: Redesign GitHub README homepages or create project-native pure SVG, hybrid SVG-composed PNG/WebP, code-fence diagrams, and opt-in animated GIF assets. Use when a user asks to beautify, redesign, rebrand, visually upgrade, simplify, or audit a GitHub README; create a hero, section headers, diagrams, badges, motion graphics, showcase modules, or other README assets; add PlantUML, Vega, infographic, or architecture diagrams to a README; or turn a repository homepage into a cohesive visual story. Supports both GitHub-native rendering and Markdown Viewer enhanced diagrams.
+description: Redesign GitHub README homepages or create project-native pure SVG, hybrid SVG-composed PNG/WebP, code-fence diagrams, optional Archify system maps, and opt-in animated GIF assets. Use when a user asks to beautify, redesign, rebrand, visually upgrade, simplify, or audit a GitHub README; create a hero, section headers, diagrams, badges, motion graphics, showcase modules, or other README assets; add PlantUML, Vega, infographic, architecture, or Archify architecture/workflow/sequence/dataflow/lifecycle diagrams to a README; or turn a repository homepage into a cohesive visual story. Supports both GitHub-native rendering and Markdown Viewer enhanced diagrams.
 ---
 
 # Beautify README
@@ -19,7 +19,7 @@ The README renders on `github.com` using GitHub's built-in Markdown renderer. Th
 - GitHub strips `<script>`, `foreignObject`, external stylesheets, web fonts, and animation inside SVG. Use only paths, shapes, text, patterns, gradients, clipping paths, and simple transforms.
 - Use GIF for approved motion that must play directly on GitHub.
 - Use Markdown for body copy, commands, tables, links, and details.
-- Diagram engines (PlantUML, Vega, etc.) may be used as production aids: generate the diagram, export a static SVG or PNG, and embed the image file. Keep the semantic source alongside the exported asset.
+- Diagram engines (PlantUML, Vega, Archify, etc.) may be used as production aids: generate the diagram, export a static SVG or PNG, and embed the image file. Keep the semantic source alongside the exported asset. For polished system maps (architecture, workflow, sequence, dataflow, lifecycle), prefer the optional Archify branch in [references/diagram-engines.md](references/diagram-engines.md) when available.
 
 ### Markdown Viewer enhanced context
 
@@ -148,14 +148,15 @@ Read [references/readme-canvas.md](references/readme-canvas.md), [references/svg
 
 - Use SVG for the hero, section banners, deterministic design modules, and GitHub-native diagrams.
 - Use code-fence diagram engines (PlantUML, Vega, infographic, canvas, architecture, infocard) for Markdown Viewer enhanced diagrams. Read [references/diagram-engines.md](references/diagram-engines.md) for the engine selection guide and critical syntax rules.
-- Use PNG/WebP for screenshots, generated art, photo material, and complex compositing. Use GIF only for approved motion.
+- For polished GitHub-native system maps (architecture, workflow, sequence, dataflow, lifecycle), use the optional **Archify** production branch when the Archify skill/CLI is available: author typed JSON → `validate` → `deliver` → export a Share Card or static PNG/SVG → embed the image and keep the JSON (and optional HTML) under `assets/readme/source/`. Do not embed interactive Archify HTML as the sole GitHub image.
+- Use PNG/WebP for screenshots, generated art, photo material, Archify Share Cards, and complex compositing. Use GIF only for approved motion.
 - When hybrid composition is selected, read [references/hybrid-svg-production.md](references/hybrid-svg-production.md), use the `imagegen` Skill for generation, and keep exact copy out of the generated raster layer.
 - Keep body copy, commands, tables, links, and details in Markdown.
 - Prefer a `1200`-unit-wide SVG `viewBox`, `width="100%"` embeds, system fonts, semantic alt text, and rounded containers.
 - Use one reusable component grammar, but vary the art direction by repository theme.
 - Let the hero absorb a real project diagram, screenshot, code fragment, output, or artifact when it makes the first screen more useful.
 
-When a diagram engine exports an SVG or PNG for GitHub-native embedding, apply the frozen project palette rather than the engine's house theme, use system fonts, and inspect the output for `<script>`, `foreignObject`, remote resources, and clipped labels.
+When a diagram engine exports an SVG or PNG for GitHub-native embedding, apply the frozen project palette rather than the engine's house theme where possible, use system fonts, and inspect the output for `<script>`, `foreignObject`, remote resources, and clipped labels. For Archify exports, choose the closest visual preset/theme and keep the IR source editable.
 
 Do not rasterize the whole README. Avoid decorative borders and heavy shadows unless the theme genuinely calls for them.
 
@@ -179,7 +180,7 @@ python3 scripts/verify_readme.py /path/to/repository/README.md
 - **Content architecture** — sections present, install path, alt text, no TOC-first
 - **Visual system** — SVG viewBox/title/desc, no fragile features, no pure black, system fonts
 - **Quality bar** — no AI filler phrases, no filler data, image references valid
-- **Diagram engine syntax** — PlantUML start/end, Vega JSON validity, infographic syntax
+- **Diagram engine syntax** — PlantUML start/end, Vega JSON validity, infographic syntax; Archify validate/deliver and static embed checks are manual
 
 If any programmatic check fails, fix the gap and re-run. Do not declare success with known failures.
 
@@ -219,6 +220,7 @@ If any dimension has failures, the overall result is FAIL. Fix the gaps and re-r
 - Visually inspect the hero, every section transition, and the final call to action.
 - In asset-only mode, render and inspect every requested asset at GitHub content width; for GIFs, inspect entry, settled hold, exit, and loop boundary.
 - For code-fence diagrams, verify they render correctly in a Markdown Viewer and check syntax against the rules in [references/diagram-engines.md](references/diagram-engines.md).
+- For Archify diagrams, confirm `validate`/`deliver` passed, the published file is a static PNG/SVG (not HTML-only), the IR source is retained, and labels remain legible at GitHub width.
 - Report what changed, what remains intentionally plain, and which files were deliberately left untouched.
 
 ### 9. Hand off safely
@@ -229,8 +231,13 @@ Show the local preview and diff first. Only commit, push, open a PR, merge, rena
 
 When the README needs structured diagrams, pick the engine that matches the job. Read [references/diagram-engines.md](references/diagram-engines.md) for full syntax rules and critical pitfalls before writing any code fence.
 
-| Need | Engine | Code fence | Context |
+| Need | Engine | Code fence / output | Context |
 | --- | --- | --- | --- |
+| Polished runtime / service architecture | Archify — `architecture` | PNG/SVG Share Card | GitHub-native |
+| CI/CD, approvals, tool-call workflows | Archify — `workflow` | PNG/SVG Share Card | GitHub-native |
+| API / cache / auth call traces | Archify — `sequence` | PNG/SVG Share Card | GitHub-native |
+| Pipelines, lineage, sensitivity boundaries | Archify — `dataflow` | PNG/SVG Share Card | GitHub-native |
+| States, retries, waits, outcomes | Archify — `lifecycle` | PNG/SVG Share Card | GitHub-native |
 | Software modeling (class, sequence, activity, state, component) | PlantUML — `uml` | ` ```plantuml ` | Both |
 | Cloud architecture (AWS, Azure, GCP, K8s) | PlantUML — `cloud` | ` ```plantuml ` | Both |
 | Network topology | PlantUML — `network` | ` ```plantuml ` | Both |
@@ -244,10 +251,10 @@ When the README needs structured diagrams, pick the engine that matches the job.
 | Advanced charts (radar, word cloud) | Vega | ` ```vega ` | Both |
 | KPI dashboard, timeline, SWOT, funnel | Infographic | ` ```infographic ` | Viewer |
 | Concept map, knowledge graph | Canvas (JSON) | ` ```canvas ` | Viewer |
-| Layered system architecture | Architecture (HTML/CSS) | direct HTML | Viewer |
+| Layered system architecture (editable HTML) | Architecture (HTML/CSS) | direct HTML | Viewer |
 | Editorial information cards | Infocard (HTML/CSS) | direct HTML | Viewer |
 
-For GitHub-native context, generate the diagram with the engine, export a static SVG or PNG, and embed it as an image file. For Markdown Viewer enhanced context, write the code fence directly in the README.
+For GitHub-native context, generate the diagram with the engine, export a static SVG or PNG, and embed it as an image file. For Markdown Viewer enhanced context, write the code fence directly in the README. Archify is optional and requires its skill/CLI; if unavailable, fall back to PlantUML, Architecture HTML, or hand-authored SVG.
 
 ## Quality bar
 
@@ -278,7 +285,7 @@ For copy sequencing and deletion rules, read [references/content-architecture.md
 | [references/project-native-hero.md](references/project-native-hero.md) | Before designing the hero or title system |
 | [references/hybrid-svg-production.md](references/hybrid-svg-production.md) | When hybrid SVG + raster composition is selected |
 | [references/motion-production.md](references/motion-production.md) | Before animating or converting to GIF |
-| [references/diagram-engines.md](references/diagram-engines.md) | Before using any code-fence diagram engine |
+| [references/diagram-engines.md](references/diagram-engines.md) | Before using any diagram engine, including optional Archify system maps |
 | [references/output-verification.md](references/output-verification.md) | Before declaring any task complete — mandatory compliance gate |
 
 ## Invocation examples
@@ -293,6 +300,10 @@ Use $beautify-readme to create one SVG hero and three section headers without mo
 
 ```text
 Use $beautify-readme to add a PlantUML architecture diagram and a Vega-Lite benchmark chart to this README for Markdown Viewer rendering.
+```
+
+```text
+Use $beautify-readme to add a GitHub-native How it works diagram via Archify: validate the architecture IR, export a Share Card PNG, and keep the JSON source.
 ```
 
 ```text

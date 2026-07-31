@@ -2,26 +2,34 @@
 
 Structured diagram engines produce maintainable, semantically editable visuals that render inline in Markdown Viewer. For GitHub-native context, use the engine to generate the diagram, export a static SVG or PNG, and embed the image file. For Markdown Viewer enhanced context, write the code fence directly in the README.
 
+**Archify** is an optional production skill for polished, validated system maps. It is not a Markdown code fence. Use it when a README needs a GitHub-ready architecture, workflow, sequence, data-flow, or lifecycle diagram with stronger layout judgment than hand-authored SVG or generic PlantUML. Read [Archify](#archify-optional-system-maps) before choosing it.
+
 ## Table of contents
 
 1. [Engine selection guide](#engine-selection-guide)
-2. [PlantUML-based engines](#plantuml-based-engines)
-3. [Vega / Vega-Lite](#vega--vega-lite)
-4. [Infographic](#infographic)
-5. [Canvas (JSON)](#canvas-json)
-6. [Architecture (HTML/CSS)](#architecture-htmlcss)
-7. [Infocard (HTML/CSS)](#infocard-htmlcss)
-8. [Critical syntax rules summary](#critical-syntax-rules-summary)
+2. [Archify (optional system maps)](#archify-optional-system-maps)
+3. [PlantUML-based engines](#plantuml-based-engines)
+4. [Vega / Vega-Lite](#vega--vega-lite)
+5. [Infographic](#infographic)
+6. [Canvas (JSON)](#canvas-json)
+7. [Architecture (HTML/CSS)](#architecture-htmlcss)
+8. [Infocard (HTML/CSS)](#infocard-htmlcss)
+9. [Critical syntax rules summary](#critical-syntax-rules-summary)
 
 ---
 
 ## Engine selection guide
 
-| Use case | Engine | Code fence |
+| Use case | Engine | Code fence / output |
 | --- | --- | --- |
+| Runtime / service architecture (polished GitHub embed) | **Archify** — `architecture` | static PNG/SVG Share Card |
+| CI/CD, approvals, tool-call workflows | **Archify** — `workflow` | static PNG/SVG Share Card |
+| API call chains, cache miss, auth traces | **Archify** — `sequence` | static PNG/SVG Share Card |
+| Pipelines, lineage, PII boundaries | **Archify** — `dataflow` | static PNG/SVG Share Card |
+| States, retries, waits, terminal outcomes | **Archify** — `lifecycle` | static PNG/SVG Share Card |
 | Flowchart / process flow | PlantUML — activity diagram | ` ```plantuml ` |
-| Sequence diagram | PlantUML — sequence | ` ```plantuml ` |
-| State machine | PlantUML — statechart | ` ```plantuml ` |
+| Sequence diagram (UML / editable fence) | PlantUML — sequence | ` ```plantuml ` |
+| State machine (UML / editable fence) | PlantUML — statechart | ` ```plantuml ` |
 | Class / object diagram | PlantUML — class | ` ```plantuml ` |
 | Component / deployment | PlantUML — component | ` ```plantuml ` |
 | Dependency graph | PlantUML — package | ` ```plantuml ` |
@@ -33,18 +41,102 @@ Structured diagram engines produce maintainable, semantically editable visuals t
 | SWOT / comparison | Infographic | ` ```infographic ` |
 | Knowledge summary card | Infocard | direct HTML |
 | Data highlight / metrics card | Infocard | direct HTML |
-| System layers (User→App→Data→Infra) | Architecture | direct HTML |
-| Microservices architecture | Architecture | direct HTML |
+| System layers editable in Markdown Viewer | Architecture | direct HTML |
+| Microservices architecture (Viewer HTML) | Architecture | direct HTML |
 | Mind map (hierarchical auto-layout) | PlantUML — mindmap | ` ```plantuml ` |
 | Mind map (free-position) | Canvas | ` ```canvas ` |
 | Knowledge graph | Canvas | ` ```canvas ` |
-| AWS / Azure / GCP architecture | PlantUML — cloud | ` ```plantuml ` |
+| AWS / Azure / GCP architecture (vendor icons) | PlantUML — cloud | ` ```plantuml ` |
 | Network topology | PlantUML — network | ` ```plantuml ` |
 | Threat model / security | PlantUML — security | ` ```plantuml ` |
 | Enterprise architecture (ArchiMate) | PlantUML — archimate | ` ```plantuml ` |
 | BPMN workflow | PlantUML — bpmn | ` ```plantuml ` |
-| ETL / data pipeline | PlantUML — data-analytics | ` ```plantuml ` |
+| ETL / data pipeline (PlantUML stencils) | PlantUML — data-analytics | ` ```plantuml ` |
 | IoT / sensor network | PlantUML — iot | ` ```plantuml ` |
+
+### When to prefer Archify vs other engines
+
+| Prefer Archify when… | Prefer another engine when… |
+| --- | --- |
+| The diagram's job is a polished "How it works" / runtime map for GitHub | The reader needs an editable Markdown Viewer code fence |
+| Edge routing, main-path emphasis, and label clearance matter more than vendor icons | You need AWS/Azure/GCP/K8s stencil icons → PlantUML cloud |
+| You want typed JSON IR, validation receipts, and reproducible Share Cards | You need ArchiMate, BPMN, Cisco, or security stencils → PlantUML domain engines |
+| Scope is architecture / workflow / sequence / dataflow / lifecycle | You need charts, KPI boards, SWOT, or knowledge cards → Vega / Infographic / Infocard |
+| 8–12 primary nodes with one clear main path | Compact hero-integrated illustration → hand-authored SVG |
+
+Do not use Archify for heroes, section banners, badges, ImageGen subjects, or decorative motion. Those stay on the SVG / hybrid / GIF paths in this skill.
+
+---
+
+## Archify (optional system maps)
+
+[Archify](https://github.com/tt-a1i/archify) is an external agent skill (`tt-a1i/archify`) that turns a typed JSON IR into a self-contained interactive HTML diagram, then exports static PNG, SVG, WebM, and 1200×630 Share Cards. This skill treats Archify as a **production aid for technical system maps**, not as a README layout system.
+
+### Prerequisites
+
+- Archify skill available to the agent (`npx skills add tt-a1i/archify` or an installed local copy), **or** the user explicitly asks to use Archify and provides access.
+- Node.js available for `node archify/bin/archify.mjs …`.
+- If Archify is unavailable, fall back to PlantUML, Architecture HTML, or hand-authored SVG and say so briefly.
+
+### Diagram types
+
+| Type | Best for in a README |
+| --- | --- |
+| `architecture` | Components, services, storage, trust boundaries |
+| `workflow` | CI/CD, approvals, agent tool calls, runbooks |
+| `sequence` | Request lifecycles, cache fallback, auth traces |
+| `dataflow` | Pipelines, lineage, sensitivity boundaries |
+| `lifecycle` | States, retries, waits, terminal outcomes |
+
+### README production branch
+
+Use this branch only when the selected visual is a system map of one of the five types above.
+
+1. Freeze the project story and visual system (palette, motif, composition) as usual.
+2. Decide scope: one bounded view, 8–12 primary nodes, one primary path; put supporting detail in cards or Markdown, not extra edges.
+3. Invoke the Archify skill (or author Archify JSON following its schemas) for the chosen type. Prefer `meta.quality_profile: "showcase"` unless the user wants a denser `standard` map.
+4. Align presentation to the frozen system where Archify allows it:
+   - pick `meta.visual_preset` (`classic`, `signal-flow`, `blueprint`, `editorial`) that fits the project tone;
+   - choose dark or light theme to match the README surface;
+   - omit `meta.animation` unless the user opted into motion for a demo asset.
+5. Validate, then deliver:
+
+   ```bash
+   node archify/bin/archify.mjs validate <type> <candidate.json> --quality showcase --json
+   node archify/bin/archify.mjs deliver <type> <candidate.json> <output.html> --quality showcase --json
+   ```
+
+6. Export a GitHub-safe static asset from the verified viewer (prefer **Copy Share Card** / diagram PNG or SVG at 1200×630 when the diagram is a README proof module). Do not embed the interactive HTML as the sole GitHub README image — GitHub will not run it as a diagram.
+7. Save under the project assets tree, for example:
+
+   ```text
+   assets/readme/
+   ├── how-it-works.png          # published embed (or .svg)
+   └── source/
+       ├── how-it-works.json     # Archify IR (editable)
+       └── how-it-works.html     # optional interactive companion
+   ```
+
+8. Embed the static image in Markdown with meaningful alt text. Optionally link the HTML companion for readers who want search, route probe, or presentation mode.
+9. Inspect at ~900px and ~360px widths; check clipped labels, contrast, and that the frozen project palette still reads as native (or note intentional Archify preset styling).
+
+### Integration rules
+
+- **Opt-in production path.** Default remains hand-authored SVG or the fence engines below. Use Archify when the user asks for a system/architecture/workflow map, when layout quality is the bottleneck, or when you explicitly choose this branch and can run its CLI.
+- **Beautify-readme owns README placement.** Archify does not decide hero structure, section order, or copy. Keep body diagrams below the fold's proof area when they explain mechanism.
+- **Static embed for GitHub-native.** Publish PNG or SVG. Keep JSON (+ optional HTML) as source. Interactive HTML may be linked, never required to understand the README.
+- **Do not invent topology.** Prefer repository evidence; do not add services, edges, or owners the codebase does not support.
+- **Repair locally.** On validation failure, change only the diagnosed subject using Archify's `supportedFixes`; do not rewrite the whole diagram or fall back to a different engine mid-repair unless Archify is unavailable.
+- **Motion stays opt-in.** Archify WebM / trace animation follows the same gate as GIF in this skill: only when the user asks for meaningful motion. GitHub README motion still prefers GIF + static fallback when playback must work on github.com itself.
+- **Palette honesty.** Prefer Archify presets closest to the frozen system. If the house theme still clashes, crop to a Share Card that sits inside an SVG frame using project colors, or fall back to PlantUML / hand SVG with the project palette.
+
+### What Archify does not replace
+
+- Hero title systems, section banners, badges
+- Hybrid ImageGen / raster subjects
+- Vega charts, Infographic templates, Infocard editorial cards
+- PlantUML domain stencils (cloud icons, ArchiMate, BPMN, network, security, IoT)
+- Markdown Viewer live-editable code fences
 
 ---
 
@@ -289,7 +381,9 @@ Spatial node-based diagrams with free x/y positioning. Obsidian Canvas compatibl
 
 ## Architecture (HTML/CSS)
 
-Layered system architecture diagrams using HTML/CSS templates with color-coded tiers and grid layouts. Best for technology stacks, microservices topology, and multi-tier application design.
+Layered system architecture diagrams using HTML/CSS templates with color-coded tiers and grid layouts. Best for technology stacks, microservices topology, and multi-tier application design **inside Markdown Viewer**.
+
+For a polished **GitHub-native** runtime / service map with validated layout and Share Card export, prefer the [Archify](#archify-optional-system-maps) branch instead of this HTML template.
 
 ### Critical rules
 
@@ -415,8 +509,9 @@ Editorial-style information cards with magazine-quality typography. Best for kno
 
 ## Critical syntax rules summary
 
-| Engine | Fence | Top mistakes to avoid |
+| Engine | Fence / output | Top mistakes to avoid |
 | --- | --- | --- |
+| Archify | JSON IR → HTML → PNG/SVG Share Card | Embedding interactive HTML as the only GitHub image; inventing topology; skipping `validate`/`deliver`; using Archify for heroes or charts |
 | PlantUML (all) | ` ```plantuml ` | Using ` ```text ` instead of ` ```plantuml `; missing `@startuml`/`@enduml` |
 | Vega-Lite | ` ```vega-lite ` | Missing `$schema`; invalid JSON (trailing commas, unquoted keys); wrong field casing |
 | Vega | ` ```vega ` | Same as Vega-Lite |

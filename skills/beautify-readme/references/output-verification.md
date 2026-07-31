@@ -82,7 +82,8 @@ Verifies that visual assets follow the production rules from [svg-production.md]
 - [ ] Vega/Vega-Lite JSON includes `$schema` and uses valid JSON (double quotes, no trailing commas).
 - [ ] Infographic uses space-separated `key value` syntax (no colons), correct template names, `desc` not `description`, `items` not `steps`.
 - [ ] Architecture and infocard HTML is embedded directly (no ` ```html ` fence), with no empty lines in the HTML structure.
-- [ ] Exported diagram images (for GitHub-native context) use the frozen project palette, not the engine's house theme.
+- [ ] Archify diagrams (when used) passed `validate`/`deliver`, publish a static PNG/SVG Share Card (not HTML-only on GitHub), retain the JSON IR under source, and do not invent unsupported topology.
+- [ ] Exported diagram images (for GitHub-native context) use the frozen project palette, not the engine's house theme, or an intentionally chosen Archify preset that still reads as project-native.
 
 ### 2.5 Motion compliance
 
