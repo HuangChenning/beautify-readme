@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">beautify-readme — Turn any GitHub README into a visual story</title>
+  <desc id="hero-desc">A skill that combines README content architecture, hand-authored SVG, 14 diagram engines, and optional motion to beautify GitHub READMEs in both GitHub-native and Markdown Viewer contexts.</desc>
+
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="360" rx="20" fill="url(#bg-grad)"/>
+
+  <!-- Subtle grid motif -->
+  <g opacity="0.04" stroke="#58a6ff" stroke-width="0.5">
+    <path d="M0 60 L1200 60 M0 120 L1200 120 M0 180 L1200 180 M0 240 L1200 240 M0 300 L1200 300"/>
+    <path d="M60 0 L60 360 M300 0 L300 360 M540 0 L540 360 M780 0 L780 360 M1020 0 L1020 360 M1140 0 L1140 360"/>
+  </g>
+
+  <!-- Left side: Title block -->
+  <g id="title-block" transform="translate(56 52)">
+    <!-- Category eyebrow -->
+    <text x="0" y="22" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="14" fill="#8b949e" letter-spacing="2">
+      AGENT SKILL · GITHUB README
+    </text>
+
+    <!-- Project name -->
+    <text x="0" y="74" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+          font-size="52" font-weight="800" fill="#e6edf3" letter-spacing="-1.5">
+      beautify-readme
+    </text>
+
+    <!-- One-line value -->
+    <text x="0" y="112" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+          font-size="22" font-weight="400" fill="#c9d1d9">
+      Turn any GitHub README into a concise,
+    </text>
+    <text x="0" y="142" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+          font-size="22" font-weight="400" fill="#c9d1d9">
+      theme-specific visual story.
+    </text>
+
+    <!-- Metadata row -->
+    <g transform="translate(0 178)">
+      <rect x="0" y="0" width="96" height="28" rx="14" fill="none" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="48" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="12" fill="#58a6ff" text-anchor="middle">SVG</text>
+
+      <rect x="108" y="0" width="120" height="28" rx="14" fill="none" stroke="#f78166" stroke-width="1.2"/>
+      <text x="168" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="12" fill="#f78166" text-anchor="middle">14 engines</text>
+
+      <rect x="240" y="0" width="86" height="28" rx="14" fill="none" stroke="#3fb950" stroke-width="1.2"/>
+      <text x="283" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="12" fill="#3fb950" text-anchor="middle">GIF</text>
+    </g>
+
+    <!-- Stats -->
+    <g transform="translate(0 226)">
+      <text x="0" y="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="13" fill="#8b949e">
+        9 references · 2 scripts · 2 rendering contexts
+      </text>
+    </g>
+  </g>
+
+  <!-- Right side: Capability diagram -->
+  <g id="capability-map" transform="translate(720 48)">
+    <!-- Section label -->
+    <text x="0" y="14" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="11" fill="#8b949e" letter-spacing="1.5">
+      DIAGRAM ENGINES
+    </text>
+
+    <!-- Row 1: GitHub-native -->
+    <g transform="translate(0 30)">
+      <!-- SVG box -->
+      <rect x="0" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="60" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+            font-size="15" font-weight="700" fill="#58a6ff" text-anchor="middle">SVG</text>
+      <text x="60" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#8b949e" text-anchor="middle">hand-authored</text>
+
+      <!-- PlantUML box -->
+      <rect x="132" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="192" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+            font-size="15" font-weight="700" fill="#58a6ff" text-anchor="middle">PlantUML</text>
+      <text x="192" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#8b949e" text-anchor="middle">9 domains</text>
+
+      <!-- Vega box -->
+      <rect x="264" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="324" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+            font-size="15" font-weight="700" fill="#58a6ff" text-anchor="middle">Vega</text>
+      <text x="324" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#8b949e" text-anchor="middle">data charts</text>
+    </g>
+
+    <!-- Row 2: Markdown Viewer enhanced -->
+    <g transform="translate(0 100)">
+      <!-- Infographic box -->
+      <rect x="0" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
+      <text x="60" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Infographic</text>
+      <text x="60" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#8b949e" text-anchor="middle">70+ templates</text>
+
+      <!-- Architecture box -->
+      <rect x="132" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
+      <text x="192" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Architecture</text>
+      <text x="192" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#8b949e" text-anchor="middle">HTML/CSS</text>
+
+      <!-- Infocard box -->
+      <rect x="264" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
+      <text x="324" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Infocard</text>
+      <text x="324" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#8b949e" text-anchor="middle">editorial</text>
+    </g>
+
+    <!-- Context labels -->
+    <g transform="translate(0 172)">
+      <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#58a6ff">
+        ■ GitHub-native
+      </text>
+      <text x="140" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+            font-size="10" fill="#f78166">
+        ■ Markdown Viewer
+      </text>
+    </g>
+
+    <!-- Connector lines between rows -->
+    <g stroke="#30363d" stroke-width="1" stroke-dasharray="3 3" fill="none">
+      <path d="M60 86 L60 100 M192 86 L192 100 M324 86 L324 100"/>
+    </g>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="56" y="340" width="400" height="2" rx="1" fill="#58a6ff" opacity="0.4"/>
+</svg>
