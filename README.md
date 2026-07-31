@@ -54,9 +54,11 @@ skills/beautify-readme/
 │   ├── project-native-hero.md        # Hero design from project content
 │   ├── hybrid-svg-production.md      # Hybrid SVG + raster composition
 │   ├── motion-production.md          # GitHub-safe GIF animation
-│   └── diagram-engines.md            # 14-engine catalog with syntax rules
+│   ├── diagram-engines.md            # 14-engine catalog with syntax rules
+│   └── output-verification.md        # Mandatory compliance gate (4 dimensions)
 └── scripts/
     ├── audit_readme.py               # Audit README image references and SVG basics
+    ├── verify_readme.py              # Programmatic compliance checker (4 dimensions)
     └── render_motion_gif.py          # Render GitHub-safe GIF from SVG + motion spec
 ```
 
@@ -105,6 +107,13 @@ Use $beautify-readme to create a hybrid hero: SVG typography and layout, plus an
 - Removing the repository name should not make the hero reusable for an unrelated project.
 - Every visual module has a communication job.
 - Design choices pass a taste checklist: no centered-only heroes, no equal-width tiles, no pure black, no neon gradients, no AI filler phrasing.
+
+## Limitations
+
+- Code-fence diagrams (PlantUML, Vega, infographic, canvas, architecture, infocard) require a Markdown Viewer extension — they render as raw code on `github.com` unless exported to static images.
+- GIF motion is opt-in and size-constrained; GitHub does not autoplay GIFs on mobile.
+- The skill does not generate raster photos or illustrations — use the `imagegen` skill for that and compose via hybrid SVG production.
+- The audit and verification scripts check structural compliance, not aesthetic judgment — manual visual review is still required.
 
 ## License
 

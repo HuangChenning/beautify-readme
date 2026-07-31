@@ -54,9 +54,11 @@ skills/beautify-readme/
 │   ├── project-native-hero.md        # 从项目内容设计 Hero
 │   ├── hybrid-svg-production.md      # 混合 SVG + 光栅合成
 │   ├── motion-production.md          # GitHub 安全的 GIF 动画
-│   └── diagram-engines.md            # 14 种引擎目录及语法规则
+│   ├── diagram-engines.md            # 14 种引擎目录及语法规则
+│   └── output-verification.md        # 强制合规关卡（4 个维度）
 └── scripts/
     ├── audit_readme.py               # 审计 README 图片引用和 SVG 基础
+    ├── verify_readme.py              # 可编程合规检查器（4 个维度）
     └── render_motion_gif.py          # 从 SVG + 动画规格渲染 GIF
 ```
 
@@ -105,6 +107,13 @@ cp -r skills/beautify-readme ~/.qoder/skills/
 - 移除仓库名称后，Hero 不应能被无关项目复用。
 - 每个视觉模块都有明确的传达职责。
 - 设计选择通过品味清单：无居中 Hero、无等宽磁贴、无纯黑、无霓虹渐变、无 AI 套话。
+
+## 局限性
+
+- 代码围栏图表（PlantUML、Vega、infographic、canvas、architecture、infocard）需要 Markdown Viewer 扩展 — 在 `github.com` 上会显示为原始代码，除非导出为静态图片。
+- GIF 动画是可选的且有大小限制；GitHub 在移动端不会自动播放 GIF。
+- 该技能不生成光栅照片或插图 — 请使用 `imagegen` 技能生成，再通过混合 SVG 合成。
+- 审计和验证脚本检查的是结构合规性，而非审美判断 — 仍需人工视觉审查。
 
 ## 许可证
 

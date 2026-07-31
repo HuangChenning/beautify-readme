@@ -159,16 +159,63 @@ When a diagram engine exports an SVG or PNG for GitHub-native embedding, apply t
 
 Do not rasterize the whole README. Avoid decorative borders and heavy shadows unless the theme genuinely calls for them.
 
-### 8. Preview and verify
+### 8. Verify output compliance (mandatory gate)
 
-- Render a local GitHub-width preview or inspect the README on a local Markdown renderer.
-- Check wide and narrow layouts, image legibility, clipped SVG text, missing assets, excessive file size, and dark/light-mode contrast.
-- In README mode, run:
+This step is a mandatory gate — do not proceed to step 9 until all checks pass. The goal is to prevent the most common failure mode: delivering a visual redesign (hero SVG, directory structure, table sorting) while skipping the content architecture, visual system rules, and quality bar that this skill defines.
+
+Read [references/output-verification.md](references/output-verification.md) for the full four-dimension checklist before proceeding.
+
+#### 8a. Run programmatic checks
+
+In README mode, run both scripts:
 
 ```bash
 python3 scripts/audit_readme.py /path/to/repository/README.md
+python3 scripts/verify_readme.py /path/to/repository/README.md
 ```
 
+`verify_readme.py` checks four dimensions programmatically:
+
+- **Content architecture** — sections present, install path, alt text, no TOC-first
+- **Visual system** — SVG viewBox/title/desc, no fragile features, no pure black, system fonts
+- **Quality bar** — no AI filler phrases, no filler data, image references valid
+- **Diagram engine syntax** — PlantUML start/end, Vega JSON validity, infographic syntax
+
+If any programmatic check fails, fix the gap and re-run. Do not declare success with known failures.
+
+#### 8b. Run manual checks
+
+Walk through every checklist item in [references/output-verification.md](references/output-verification.md) that the script cannot cover:
+
+- **Dimension 1 (Content architecture)** — first-screen test, content sequence, editing rules, visual-to-text division
+- **Dimension 2 (Visual system)** — visual system spec frozen, text legibility at 900px and 360px, diagram engine compliance, motion compliance
+- **Dimension 3 (Quality bar)** — project-native design, proof and clarity, graceful degradation, taste checklist (anti-AI)
+- **Dimension 4 (Workflow compliance)** — mode and context confirmed, story and system extracted, verification executed, reporting complete
+
+#### 8c. Produce a verification summary
+
+Report a summary table showing pass/fail for each dimension:
+
+```text
+Verification summary
+=====================
+Dimension 1 — Content architecture:    PASS (12/12)
+Dimension 2 — Visual system:            PASS (15/15)
+Dimension 3 — Quality bar:              PASS (10/10)
+Dimension 4 — Workflow compliance:      PASS (10/10)
+
+Programmatic checks:  15 passed, 0 failed
+Manual checks:        32 passed, 0 failed
+
+Overall: PASS
+```
+
+If any dimension has failures, the overall result is FAIL. Fix the gaps and re-run before proceeding to step 9. Do not skip, defer, or mark known failures as acceptable.
+
+#### 8d. Visual inspection
+
+- Render a local GitHub-width preview or inspect the README on a local Markdown renderer.
+- Check wide (`900px`) and narrow (`360px`) layouts, image legibility, clipped SVG text, missing assets, excessive file size, and dark/light-mode contrast.
 - Visually inspect the hero, every section transition, and the final call to action.
 - In asset-only mode, render and inspect every requested asset at GitHub content width; for GIFs, inspect entry, settled hold, exit, and loop boundary.
 - For code-fence diagrams, verify they render correctly in a Markdown Viewer and check syntax against the rules in [references/diagram-engines.md](references/diagram-engines.md).
@@ -232,6 +279,7 @@ For copy sequencing and deletion rules, read [references/content-architecture.md
 | [references/hybrid-svg-production.md](references/hybrid-svg-production.md) | When hybrid SVG + raster composition is selected |
 | [references/motion-production.md](references/motion-production.md) | Before animating or converting to GIF |
 | [references/diagram-engines.md](references/diagram-engines.md) | Before using any code-fence diagram engine |
+| [references/output-verification.md](references/output-verification.md) | Before declaring any task complete — mandatory compliance gate |
 
 ## Invocation examples
 
