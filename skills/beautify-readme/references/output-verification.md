@@ -28,8 +28,8 @@ Verifies that the README content follows the sequencing and editing rules from [
 
 ### 1.2 Content sequence
 
-- [ ] The reading order follows `Value → Proof → Mechanism → First use → Detail` (or a justified alternative).
-- [ ] The README does not begin with architecture, contributor instructions, a command, or a long table of contents.
+- [ ] The reading order follows `Value → Proof → Mechanism → First use → Detail` (or a justified alternative). *(Programmatic: check 1.7 verifies relative stage order via `verify_readme.py`)*
+- [ ] The README does not begin with architecture, contributor instructions, a command, or a long table of contents. *(Programmatic: check 1.4)*
 - [ ] An example appears before the long explanation.
 
 ### 1.3 Editing rules

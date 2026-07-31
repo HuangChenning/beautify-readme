@@ -128,6 +128,101 @@ def check_content_sections(readme):
     return results
 
 
+# Stage keywords for Value → Proof → Mechanism → First use → Detail sequence
+STAGE_KEYWORDS = {
+    "Value": [
+        "what", "about", "overview", "introduction", "features",
+        "它能做什么", "是什么", "概述", "简介", "介绍", "功能", "特点",
+    ],
+    "Proof": [
+        "proof", "demo", "example", "screenshot", "showcase", "benchmark", "result",
+        "示例", "演示", "截图", "效果", "展示",
+    ],
+    "Mechanism": [
+        "how it works", "architecture", "design", "mechanism", "principle",
+        "工作原理", "工作流程", "流程", "架构", "原理", "机制", "设计",
+    ],
+    "First use": [
+        "install", "getting started", "quick start", "setup", "usage",
+        "安装", "使用", "快速开始", "入门", "开始使用",
+    ],
+    "Detail": [
+        "api", "configuration", "advanced", "reference", "faq", "contributing",
+        "license", "limitation", "constraint", "caveat",
+        "配置", "高级", "参考", "常见问题", "贡献", "许可证", "局限", "限制",
+    ],
+}
+
+# The recommended order
+STAGE_ORDER = ["Value", "Proof", "Mechanism", "First use", "Detail"]
+
+
+def classify_heading(heading_text):
+    """Map a heading to a content-architecture stage. Returns stage name or None."""
+    text_lower = heading_text.lower()
+    for stage in STAGE_ORDER:
+        for kw in STAGE_KEYWORDS[stage]:
+            if kw in text_lower:
+                return stage
+    return None
+
+
+def check_content_sequence(readme):
+    """Check that sections follow Value → Proof → Mechanism → First use → Detail order."""
+    results = []
+
+    # Extract all headings (## and #) with their line positions
+    headings = []
+    for match in re.finditer(r"^(#{1,2})\s+(.+)$", readme, re.MULTILINE):
+        level = len(match.group(1))
+        text = match.group(2).strip()
+        pos = match.start()
+        headings.append((level, text, pos))
+
+    if not headings:
+        results.append(CheckResult(
+            "1.7 Content sequence order",
+            False,
+            "No headings found"
+        ))
+        return results
+
+    # Classify each heading to a stage
+    stage_positions = {}  # stage -> first occurrence position
+    for level, text, pos in headings:
+        stage = classify_heading(text)
+        if stage and stage not in stage_positions:
+            stage_positions[stage] = pos
+
+    found_stages = [s for s in STAGE_ORDER if s in stage_positions]
+
+    if len(found_stages) < 2:
+        results.append(CheckResult(
+            "1.7 Content sequence order",
+            True,
+            f"Only {len(found_stages)} stage(s) detected — order check N/A"
+        ))
+        return results
+
+    # Check that found stages appear in the correct relative order
+    order_ok = True
+    violations = []
+    for i in range(len(found_stages) - 1):
+        earlier = found_stages[i]
+        later = found_stages[i + 1]
+        if stage_positions[earlier] > stage_positions[later]:
+            order_ok = False
+            violations.append(f"{earlier} appears after {later}")
+
+    results.append(CheckResult(
+        "1.7 Content sequence order (Value → Proof → Mechanism → First use → Detail)",
+        order_ok,
+        "; ".join(violations) if violations else f"Stages in order: {' → '.join(found_stages)}"
+    ))
+
+    return results
+
+
 def check_alt_text(readme):
     """Check that images have meaningful alt text."""
     results = []
@@ -511,7 +606,7 @@ def main():
     # Dimension 1: Content architecture
     print("Dimension 1 — Content architecture")
     print("-" * 50)
-    d1 = check_content_sections(readme) + check_alt_text(readme)
+    d1 = check_content_sections(readme) + check_content_sequence(readme) + check_alt_text(readme)
     all_results.extend(d1)
     for r in d1:
         print(r)
