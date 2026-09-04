@@ -124,6 +124,28 @@ Use $beautify-readme to create a hybrid hero: SVG typography and layout, plus an
 - The skill does not generate raster photos or illustrations — use the `imagegen` skill for that and compose via hybrid SVG production.
 - The audit and verification scripts check structural compliance, not aesthetic judgment — manual visual review is still required.
 
+## Contributors
+
+<p align="center">
+  Thanks to everyone building this skill.
+</p>
+
+<p align="center">
+  <a href="https://github.com/HuangChenning/beautify-readme/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=HuangChenning/beautify-readme" alt="Contributors to HuangChenning/beautify-readme" />
+  </a>
+</p>
+
+### Contribution stats
+
+<!-- CONTRIBUTORS:START -->
+| Contributor | Commits | Lines added | Lines removed |
+| --- | ---: | ---: | ---: |
+| HuangChenning | 6 | +3,909 | −51 |
+<!-- CONTRIBUTORS:END -->
+
+<sub>Generated from <code>git shortlog</code> and <code>git log --shortstat</code> (merge commits excluded). Refresh with <code>python3 scripts/update_contributors.py</code> whenever this README changes.</sub>
+
 ## License
 
 MIT

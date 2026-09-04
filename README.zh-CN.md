@@ -124,6 +124,28 @@ cp -r skills/beautify-readme ~/.qoder/skills/
 - 该技能不生成光栅照片或插图 — 请使用 `imagegen` 技能生成，再通过混合 SVG 合成。
 - 审计和验证脚本检查的是结构合规性，而非审美判断 — 仍需人工视觉审查。
 
+## 贡献者
+
+<p align="center">
+  感谢所有参与构建这个技能的人。
+</p>
+
+<p align="center">
+  <a href="https://github.com/HuangChenning/beautify-readme/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=HuangChenning/beautify-readme" alt="HuangChenning/beautify-readme 贡献者" />
+  </a>
+</p>
+
+### 贡献统计
+
+<!-- CONTRIBUTORS:START -->
+| 贡献者 | 提交次数 | 新增行 | 删除行 |
+| --- | ---: | ---: | ---: |
+| HuangChenning | 6 | +3,909 | −51 |
+<!-- CONTRIBUTORS:END -->
+
+<sub>数据来自 <code>git shortlog</code> 与 <code>git log --shortstat</code>（不含 merge 提交）。更新本 README 时请运行 <code>python3 scripts/update_contributors.py</code> 刷新。</sub>
+
 ## 许可证
 
 MIT

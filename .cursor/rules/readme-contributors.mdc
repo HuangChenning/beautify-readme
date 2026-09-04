@@ -1,0 +1,31 @@
+---
+description: Keep README contributor avatars and git stats fresh whenever README files change
+globs: README.md, README.zh-CN.md
+alwaysApply: false
+---
+
+# README contributors must stay current
+
+Whenever you edit `README.md` or `README.zh-CN.md`, refresh the Contributors section in **both** files before finishing.
+
+## Required workflow
+
+1. Run from the repo root:
+
+```bash
+python3 scripts/update_contributors.py
+```
+
+2. Confirm both READMEs still contain:
+   - the `contrib.rocks` avatar image for `HuangChenning/beautify-readme`
+   - a stats table between `<!-- CONTRIBUTORS:START -->` and `<!-- CONTRIBUTORS:END -->`
+3. Do not hand-edit numbers inside the markers — regenerate them with the script.
+4. Keep Contributors above License / 许可证, after Limitations / 局限性.
+5. Exclude merge commits (the script already uses `--no-merges`).
+
+## Section shape
+
+- English heading: `## Contributors`
+- Chinese heading: `## 贡献者`
+- Centered thanks line + contrib.rocks image + stats table + short footnote
+- Repo slug in the image URL must stay `HuangChenning/beautify-readme`
