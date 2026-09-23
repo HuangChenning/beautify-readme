@@ -11,6 +11,7 @@ An agent skill that turns any GitHub README into a concise, theme-specific visua
 - **README mode** — restructure the story, build a visual system, and produce a cohesive homepage.
 - **Asset-only mode** — create individual SVG heroes, section headers, diagrams, badges, or motion graphics without touching the README.
 - **Dual rendering context** — GitHub-native SVG/PNG/GIF for `github.com`, plus code-fence diagrams (PlantUML, Vega, infographic, canvas, architecture, infocard) for Markdown Viewer extensions.
+- **Code stats badges** — code size and lines-of-code badges from shields.io, with a GitHub Actions workflow that keeps the line count current.
 - **Optional Archify maps** — validated architecture / workflow / sequence / dataflow / lifecycle diagrams exported as Share Cards for GitHub-native embeds.
 
 ## Diagram engines
