@@ -11,6 +11,7 @@
 - **README 模式** — 重构内容故事，构建视觉系统，产出一个协调的主页。
 - **资产模式** — 仅创建 SVG Hero、章节标题、图表、徽章或动画图形，不修改 README。
 - **双渲染上下文** — 面向 `github.com` 的 GitHub 原生 SVG/PNG/GIF，以及面向 Markdown Viewer 扩展的代码围栏图表（PlantUML、Vega、infographic、canvas、architecture、infocard）。
+- **代码统计徽章** — 用 shields.io 显示代码体积和代码行数，行数由 GitHub Actions 工作流自动更新。
 - **可选 Archify 系统图** — 经校验的架构 / 工作流 / 时序 / 数据流 / 生命周期图，导出 Share Card 供 GitHub 原生嵌入。
 
 ## 图表引擎
