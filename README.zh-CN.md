@@ -15,37 +15,28 @@
 - **双渲染上下文** — 面向 `github.com` 的 GitHub 原生 SVG/PNG/GIF，以及面向 Markdown Viewer 扩展的代码围栏图表（PlantUML、Vega、infographic、canvas、architecture、infocard）。
 - **编辑型静态代码图** — GitHub 原生流程图、依赖图、类图、ER/数据库图、树图、时间线和泳道图，并保留源码证据与保真清单。
 - **代码统计徽章** — 用 shields.io 显示代码体积和代码行数，行数由 GitHub Actions 工作流自动更新。
-- **可选 Archify 系统图** — 经校验的架构 / 工作流 / 时序 / 数据流 / 生命周期图，导出 Share Card 供 GitHub 原生嵌入。
+- **可选 Archify 系统图** — 经校验的架构 / 工作流 / 时序 / 数据流 / 生命周期图，经 Archify 3.x `finalize` 校验后，导出静态 SVG/PNG 供 GitHub 原生嵌入。
 
 ## 工作流程：从请求到经验证的资产
 
 <p align="center">
-  <img src="./assets/readme/diagrams/readme-production-flow.svg" width="100%" alt="从 README 请求开始，依次经过仓库检查、生产路径选择、静态资产构建、质量验证和安全交付的八阶段流程">
+  <img src="./assets/readme/diagrams/how-it-works.zh-CN.svg" width="100%" alt="四条泳道的工作流：README 请求依次经过确认模式、检查仓库和冻结叙事，再进入路由视觉与构建资产，最后由四维度验证关卡把关，失败退回构建，通过后进入预览与 diff">
 </p>
 
-这张图本身就通过新的 editorial-static 合同生成：GitHub 安全的 SVG，并保留[源码证据与保真清单](./assets/readme/source/readme-production-flow.diagram.json)。先确认仓库事实，再冻结视觉决策，最后通过验证关卡后交付。
+先确认仓库事实，再冻结视觉决策；验证关卡不通过就退回构建步骤，通过后才交付。这张图由 Archify 3.x 根据[类型化工作流 IR](./assets/readme/source/how-it-works.zh-CN.archify.json) 绘制，每个节点都引用了 `SKILL.md` 中的行号范围。
 
 ## 选择生产路径
 
-| 需求 | 引擎 | 代码围栏 / 产出 | 上下文 |
+| 引擎 | 适用场景 | 产出 | 渲染环境 |
 | --- | --- | --- | --- |
-| 代码分支与决策逻辑 | Editorial-static | SVG/PNG + 证据清单 | GitHub 原生 |
-| 依赖、类、ER 或数据库结构 | Editorial-static | SVG/PNG + 证据清单 | GitHub 原生 |
-| 仓库层级、时间线或角色交接 | Editorial-static | SVG/PNG + 证据清单 | GitHub 原生 |
-| 精致运行时 / 服务架构图 | Archify | PNG/SVG Share Card | GitHub 原生 |
-| CI/CD、审批、工具调用工作流 | Archify | PNG/SVG Share Card | GitHub 原生 |
-| API / 缓存 / 鉴权轨迹；数据流；生命周期 | Archify | PNG/SVG Share Card | GitHub 原生 |
-| 软件建模（类图、序列图、活动图、状态图） | PlantUML | ` ```plantuml ` | 两者 |
-| 云架构（AWS、Azure、GCP、K8s） | PlantUML | ` ```plantuml ` | 两者 |
-| 网络 / 安全 / IoT / BPMN / ArchiMate | PlantUML | ` ```plantuml ` | 两者 |
-| 数据图表（柱状、折线、散点、热力图） | Vega-Lite | ` ```vega-lite ` | 两者 |
-| 高级图表（雷达、词云） | Vega | ` ```vega ` | 两者 |
-| KPI 仪表盘、时间线、SWOT、漏斗 | Infographic | ` ```infographic ` | Viewer |
-| 概念图、知识图谱 | Canvas (JSON) | ` ```canvas ` | Viewer |
-| 分层系统架构（可编辑 HTML） | Architecture | 直接 HTML | Viewer |
-| 编辑风格信息卡片 | Infocard | 直接 HTML | Viewer |
+| 手写 SVG | Hero、章节标题、徽章 | `.svg` | GitHub |
+| Editorial-static | 代码逻辑、依赖、类 / ER / 数据库、树图、时间线、泳道 | SVG/PNG + 证据清单 | GitHub |
+| Archify | 运行时架构、工作流、时序、数据流、生命周期 | 导出的 SVG/PNG + JSON IR | GitHub |
+| PlantUML | UML、云架构、网络、BPMN、ArchiMate | ` ```plantuml ` | 两者 |
+| Vega / Vega-Lite | 数据图表、雷达图、词云 | ` ```vega-lite ` / ` ```vega ` | 两者 |
+| Infographic、Canvas、Architecture、Infocard | KPI 仪表盘、概念图、可编辑 HTML 架构、信息卡片 | 代码围栏或直接 HTML | Viewer |
 
-对于 GitHub 原生代码图，editorial-static 会先冻结类型、格式、尺寸、细节和受众，将成品发布到 `assets/readme/diagrams/`，并在 `assets/readme/source/` 保留源码证据与保真清单。在 Markdown Viewer 上下文中，直接在 README 中编写代码围栏。Archify 为可选外部技能（`tt-a1i/archify`）；不可用时回退到 editorial-static、PlantUML、Architecture HTML 或手写 SVG。
+GitHub 原生资产发布到 `assets/readme/diagrams/`，源文件保留在 `assets/readme/source/`；仅 Viewer 可用的代码围栏直接写入 README。Archify 为可选外部技能（`tt-a1i/archify`），不可用时回退到 editorial-static、PlantUML 或手写 SVG。
 
 ## 安装
 
@@ -84,7 +75,7 @@ cp -r skills/beautify-readme ~/.qoder/skills/
 ```
 
 ```
-使用 $beautify-readme 通过 Archify 添加 GitHub 原生的 How it works 图，并导出 Share Card PNG。
+使用 $beautify-readme 通过 Archify 添加 GitHub 原生的 How it works 图，并导出图表 SVG。
 ```
 
 ```
@@ -111,7 +102,7 @@ skills/beautify-readme/
 └── scripts/
     ├── audit_readme.py               # 审计 README 图片引用和 SVG 基础
     ├── verify_readme.py              # 可编程合规检查器（4 个维度）
-    ├── test_verify_readme.py         # Editorial-static 验证测试
+    ├── test_verify_readme.py         # 校验器测试（editorial-static、Archify）
     └── render_motion_gif.py          # 从 SVG + 动画规格渲染 GIF
 ```
 
@@ -129,7 +120,7 @@ skills/beautify-readme/
 
 - 代码围栏图表（PlantUML、Vega、infographic、canvas、architecture、infocard）需要 Markdown Viewer 扩展 — 在 `github.com` 上会显示为原始代码，除非导出为静态图片。
 - Editorial-static 图依赖 Agent 检查代码，而非自动程序分析；清单能让证据可审计，但不能证明行为覆盖完整。
-- Archify 系统图需要外部技能 `tt-a1i/archify` 与 Node.js；GitHub 嵌入必须使用导出的 PNG/SVG，不能仅依赖交互式 HTML。
+- Archify 系统图需要外部技能 `tt-a1i/archify`（3.x）与 Node.js。静态 SVG/PNG 需在生成的 HTML 中通过 Export 菜单导出，因此需要一步浏览器操作；GitHub 嵌入必须使用导出文件，不能仅依赖交互式 HTML。
 - GIF 动画是可选的且有大小限制；GitHub 在移动端不会自动播放 GIF。
 - 该技能不生成光栅照片或插图 — 请使用 `imagegen` 技能生成，再通过混合 SVG 合成。
 - 审计和验证脚本检查的是结构合规性，而非审美判断 — 仍需人工视觉审查。
@@ -152,7 +143,7 @@ skills/beautify-readme/
 | 贡献者 | 提交次数 | 新增行 | 删除行 |
 | --- | ---: | ---: | ---: |
 | HuangChenning | 7 | +4,101 | −51 |
-| Huangcn | 1 | +63 | −0 |
+| Huangcn | 4 | +1,278 | −141 |
 <!-- CONTRIBUTORS:END -->
 
 <sub>数据来自 <code>git shortlog</code> 与 <code>git log --shortstat</code>（不含 merge 提交）。更新本 README 时请运行 <code>python3 scripts/update_contributors.py</code> 刷新。</sub>

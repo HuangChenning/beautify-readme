@@ -15,37 +15,28 @@ An agent skill that turns any GitHub README into a concise, theme-specific visua
 - **Dual rendering context** — GitHub-native SVG/PNG/GIF for `github.com`, plus code-fence diagrams (PlantUML, Vega, infographic, canvas, architecture, infocard) for Markdown Viewer extensions.
 - **Editorial static code diagrams** — GitHub-native flowcharts, dependency maps, class/ER/database diagrams, trees, timelines, and swimlanes with source evidence and a fidelity manifest.
 - **Code stats badges** — code size and lines-of-code badges from shields.io, with a GitHub Actions workflow that keeps the line count current.
-- **Optional Archify maps** — validated architecture / workflow / sequence / dataflow / lifecycle diagrams exported as Share Cards for GitHub-native embeds.
+- **Optional Archify maps** — validated architecture / workflow / sequence / dataflow / lifecycle diagrams checked by Archify 3.x `finalize`, then exported as static SVG/PNG for GitHub-native embeds.
 
 ## How it works: from request to verified asset
 
 <p align="center">
-  <img src="./assets/readme/diagrams/readme-production-flow.svg" width="100%" alt="Eight-stage flow from a README request through repository inspection, production-path selection, static asset creation, verification, and safe handoff">
+  <img src="./assets/readme/diagrams/how-it-works.svg" width="100%" alt="Workflow across four lanes: a README request moves through mode confirmation, repository inspection, and a frozen story, then visual routing and asset building, then a four-dimension verify gate that sends failures back to building and passes to preview and diff">
 </p>
 
-The diagram is itself produced through the new editorial-static contract: a GitHub-safe SVG backed by a [source-evidence and fidelity manifest](./assets/readme/source/readme-production-flow.diagram.json). Repository facts come first, visual decisions are frozen before drawing, and validation happens before handoff.
+Repository facts come first, visual decisions are frozen before drawing, and nothing ships until the verify gate passes — a failure loops back to the build step. The diagram was drawn with Archify 3.x from a [typed workflow IR](./assets/readme/source/how-it-works.archify.json) whose nodes cite line ranges in `SKILL.md`.
 
 ## Choose a production path
 
-| Need | Engine | Code fence / output | Context |
+| Engine | Use it for | Output | Renders on |
 | --- | --- | --- | --- |
-| Code branches and decision logic | Editorial-static | SVG/PNG + evidence manifest | GitHub-native |
-| Dependencies, class/ER/database structure | Editorial-static | SVG/PNG + evidence manifest | GitHub-native |
-| Repository hierarchy, timeline, or handoffs | Editorial-static | SVG/PNG + evidence manifest | GitHub-native |
-| Polished runtime / service architecture | Archify | PNG/SVG Share Card | GitHub-native |
-| CI/CD, approvals, tool-call workflows | Archify | PNG/SVG Share Card | GitHub-native |
-| API / cache / auth traces; dataflow; lifecycle | Archify | PNG/SVG Share Card | GitHub-native |
-| Software modeling (class, sequence, activity, state) | PlantUML | ` ```plantuml ` | Both |
-| Cloud architecture (AWS, Azure, GCP, K8s) | PlantUML | ` ```plantuml ` | Both |
-| Network / security / IoT / BPMN / ArchiMate | PlantUML | ` ```plantuml ` | Both |
-| Data charts (bar, line, scatter, heatmap) | Vega-Lite | ` ```vega-lite ` | Both |
-| Advanced charts (radar, word cloud) | Vega | ` ```vega ` | Both |
-| KPI dashboard, timeline, SWOT, funnel | Infographic | ` ```infographic ` | Viewer |
-| Concept map, knowledge graph | Canvas (JSON) | ` ```canvas ` | Viewer |
-| Layered system architecture (editable HTML) | Architecture | direct HTML | Viewer |
-| Editorial information cards | Infocard | direct HTML | Viewer |
+| Hand SVG | Heroes, section headers, badges | `.svg` | GitHub |
+| Editorial-static | Code logic, dependencies, class / ER / database, trees, timelines, swimlanes | SVG/PNG + evidence manifest | GitHub |
+| Archify | Runtime architecture, workflows, sequences, dataflow, lifecycles | exported SVG/PNG + JSON IR | GitHub |
+| PlantUML | UML, cloud, network, BPMN, ArchiMate | ` ```plantuml ` | Both |
+| Vega / Vega-Lite | Data charts, radar, word clouds | ` ```vega-lite ` / ` ```vega ` | Both |
+| Infographic, Canvas, Architecture, Infocard | KPI dashboards, concept maps, editable HTML architecture, info cards | code fence or direct HTML | Viewer |
 
-For GitHub-native code diagrams, editorial-static freezes type, format, size, detail, and audience; publishes under `assets/readme/diagrams/`; and retains source evidence plus the fidelity ledger under `assets/readme/source/`. For Markdown Viewer context, write the code fence directly in the README. Archify is an optional external skill (`tt-a1i/archify`); when unavailable, fall back to editorial-static, PlantUML, Architecture HTML, or hand-authored SVG.
+GitHub-native assets go to `assets/readme/diagrams/` with their source under `assets/readme/source/`; Viewer-only fences go straight into the README. Archify is optional (`tt-a1i/archify`) — without it, the skill falls back to editorial-static, PlantUML, or hand SVG.
 
 ## Installation
 
@@ -84,7 +75,7 @@ Use $beautify-readme to inspect this repository and add a GitHub-native request 
 ```
 
 ```
-Use $beautify-readme to add a GitHub-native How it works diagram via Archify and export a Share Card PNG.
+Use $beautify-readme to add a GitHub-native How it works diagram via Archify and export the diagram SVG.
 ```
 
 ```
@@ -111,7 +102,7 @@ skills/beautify-readme/
 └── scripts/
     ├── audit_readme.py               # Audit README image references and SVG basics
     ├── verify_readme.py              # Programmatic compliance checker (4 dimensions)
-    ├── test_verify_readme.py         # Editorial-static verification tests
+    ├── test_verify_readme.py         # Verifier tests (editorial-static, Archify)
     └── render_motion_gif.py          # Render GitHub-safe GIF from SVG + motion spec
 ```
 
@@ -129,7 +120,7 @@ skills/beautify-readme/
 
 - Code-fence diagrams (PlantUML, Vega, infographic, canvas, architecture, infocard) require a Markdown Viewer extension — they render as raw code on `github.com` unless exported to static images.
 - Editorial-static diagrams rely on Agent code inspection rather than automatic program analysis; manifests make evidence auditable but cannot prove behavioral completeness.
-- Archify system maps require the external `tt-a1i/archify` skill and Node.js; GitHub embeds must use exported PNG/SVG, not interactive HTML alone.
+- Archify system maps require the external `tt-a1i/archify` skill (3.x) and Node.js. Static SVG/PNG comes from the checked HTML's Export menu, so a browser step is needed; GitHub embeds must use that export, not interactive HTML alone.
 - GIF motion is opt-in and size-constrained; GitHub does not autoplay GIFs on mobile.
 - The skill does not generate raster photos or illustrations — use the `imagegen` skill for that and compose via hybrid SVG production.
 - The audit and verification scripts check structural compliance, not aesthetic judgment — manual visual review is still required.
@@ -152,7 +143,7 @@ skills/beautify-readme/
 | Contributor | Commits | Lines added | Lines removed |
 | --- | ---: | ---: | ---: |
 | HuangChenning | 7 | +4,101 | −51 |
-| Huangcn | 1 | +63 | −0 |
+| Huangcn | 4 | +1,278 | −141 |
 <!-- CONTRIBUTORS:END -->
 
 <sub>Generated from <code>git shortlog</code> and <code>git log --shortstat</code> (merge commits excluded). Refresh with <code>python3 scripts/update_contributors.py</code> whenever this README changes.</sub>

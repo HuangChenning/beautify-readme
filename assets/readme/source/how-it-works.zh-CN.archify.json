@@ -1,0 +1,277 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "beautify-readme：从请求到经验证的 README",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-how-it-works-zh-20261014-012127/how-it-works.zh-CN.html",
+    "repository": {
+      "url": "https://github.com/HuangChenning/beautify-readme.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "78f331138cd6f27a383335c6337e244cbcbcb02d"
+    }
+  },
+  "lanes": [
+    {
+      "id": "you",
+      "label": "你"
+    },
+    {
+      "id": "skill",
+      "label": "beautify-readme"
+    },
+    {
+      "id": "produce",
+      "label": "生产路径"
+    },
+    {
+      "id": "gate",
+      "label": "验证关卡"
+    }
+  ],
+  "phases": [
+    {
+      "id": "understand",
+      "label": "理解",
+      "fromCol": 0,
+      "toCol": 2
+    },
+    {
+      "id": "design",
+      "label": "设计",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "deliver",
+      "label": "生产与验证",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "request",
+    "mode",
+    "inspect",
+    "story",
+    "route",
+    "build",
+    "verify",
+    "handoff"
+  ],
+  "nodes": [
+    {
+      "id": "request",
+      "lane": "you",
+      "col": 0,
+      "type": "external",
+      "label": "README 请求",
+      "sublabel": "重设计或资产"
+    },
+    {
+      "id": "mode",
+      "lane": "skill",
+      "col": 1,
+      "type": "backend",
+      "label": "确认模式",
+      "sublabel": "README 或仅资产",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 44,
+          "end_line": 61,
+          "label": "Confirm mode"
+        }
+      ]
+    },
+    {
+      "id": "inspect",
+      "lane": "skill",
+      "col": 2,
+      "type": "backend",
+      "label": "检查仓库",
+      "sublabel": "README、目录、证据",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 63,
+          "end_line": 70,
+          "label": "Inspect"
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "lane": "skill",
+      "col": 3,
+      "type": "backend",
+      "label": "冻结叙事",
+      "sublabel": "配色与母题",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 84,
+          "end_line": 97,
+          "label": "Story"
+        },
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 127,
+          "end_line": 142,
+          "label": "Visual system"
+        }
+      ]
+    },
+    {
+      "id": "route",
+      "lane": "produce",
+      "col": 3,
+      "type": "messagebus",
+      "label": "路由视觉",
+      "sublabel": "选择引擎",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 98,
+          "end_line": 117,
+          "label": "Routing rules"
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "lane": "produce",
+      "col": 4,
+      "type": "backend",
+      "label": "构建资产",
+      "sublabel": "SVG、editorial、Archify",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 174,
+          "end_line": 184,
+          "label": "Visual layer"
+        }
+      ]
+    },
+    {
+      "id": "verify",
+      "lane": "gate",
+      "col": 5,
+      "type": "security",
+      "label": "验证关卡",
+      "sublabel": "四个维度",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 200,
+          "end_line": 216,
+          "label": "Programmatic checks"
+        },
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 245,
+          "end_line": 245,
+          "label": "Fail and re-run"
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "lane": "you",
+      "col": 5,
+      "type": "frontend",
+      "label": "预览与 diff",
+      "sublabel": "仅按需推送",
+      "sources": [
+        {
+          "path": "skills/beautify-readme/SKILL.md",
+          "line": 258,
+          "end_line": 260,
+          "label": "Hand off"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "request-mode",
+      "from": "request",
+      "to": "mode",
+      "label": "范围",
+      "variant": "emphasis"
+    },
+    {
+      "id": "mode-inspect",
+      "from": "mode",
+      "to": "inspect",
+      "variant": "emphasis"
+    },
+    {
+      "id": "inspect-story",
+      "from": "inspect",
+      "to": "story",
+      "variant": "emphasis"
+    },
+    {
+      "id": "story-route",
+      "from": "story",
+      "to": "route",
+      "label": "机制",
+      "variant": "emphasis"
+    },
+    {
+      "id": "route-build",
+      "from": "route",
+      "to": "build",
+      "label": "引擎",
+      "variant": "emphasis"
+    },
+    {
+      "id": "build-verify",
+      "from": "build",
+      "to": "verify",
+      "label": "资产",
+      "variant": "emphasis"
+    },
+    {
+      "id": "verify-handoff",
+      "from": "verify",
+      "to": "handoff",
+      "label": "通过",
+      "variant": "emphasis"
+    },
+    {
+      "id": "verify-fix",
+      "from": "verify",
+      "to": "build",
+      "label": "失败：修复后重跑",
+      "variant": "security",
+      "role": "error"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "生产路径",
+      "items": [
+        "手写 SVG：Hero 与横幅",
+        "Editorial-static：代码结构",
+        "Archify：运行时流程",
+        "PlantUML 与 Vega：Viewer 代码块"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "验证关卡",
+      "items": [
+        "verify_readme.py 与 audit_readme.py",
+        "四维度人工清单",
+        "900px 与 360px 预览"
+      ]
+    }
+  ]
+}

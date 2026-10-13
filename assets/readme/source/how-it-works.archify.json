@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "beautify-readme: from request to verified README",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-how-it-works-20261014-012127/how-it-works.html",
+    "repository": {
+      "url": "https://github.com/HuangChenning/beautify-readme.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "78f331138cd6f27a383335c6337e244cbcbcb02d"
+    }
+  },
+  "lanes": [
+    { "id": "you", "label": "You" },
+    { "id": "skill", "label": "beautify-readme" },
+    { "id": "produce", "label": "Production path" },
+    { "id": "gate", "label": "Verification gate" }
+  ],
+  "phases": [
+    { "id": "understand", "label": "Understand", "fromCol": 0, "toCol": 2 },
+    { "id": "design", "label": "Design", "fromCol": 3, "toCol": 3, "variant": "emphasis" },
+    { "id": "deliver", "label": "Produce + verify", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": ["request", "mode", "inspect", "story", "route", "build", "verify", "handoff"],
+  "nodes": [
+    {
+      "id": "request", "lane": "you", "col": 0, "type": "external",
+      "label": "README request", "sublabel": "redesign or assets"
+    },
+    {
+      "id": "mode", "lane": "skill", "col": 1, "type": "backend",
+      "label": "Confirm mode", "sublabel": "README or asset-only",
+      "sources": [{ "path": "skills/beautify-readme/SKILL.md", "line": 44, "end_line": 61, "label": "Confirm mode" }]
+    },
+    {
+      "id": "inspect", "lane": "skill", "col": 2, "type": "backend",
+      "label": "Inspect repo", "sublabel": "README, tree, proof",
+      "sources": [{ "path": "skills/beautify-readme/SKILL.md", "line": 63, "end_line": 70, "label": "Inspect" }]
+    },
+    {
+      "id": "story", "lane": "skill", "col": 3, "type": "backend",
+      "label": "Freeze story", "sublabel": "palette + motif",
+      "sources": [
+        { "path": "skills/beautify-readme/SKILL.md", "line": 84, "end_line": 97, "label": "Story" },
+        { "path": "skills/beautify-readme/SKILL.md", "line": 127, "end_line": 142, "label": "Visual system" }
+      ]
+    },
+    {
+      "id": "route", "lane": "produce", "col": 3, "type": "messagebus",
+      "label": "Route visuals", "sublabel": "pick an engine",
+      "sources": [{ "path": "skills/beautify-readme/SKILL.md", "line": 98, "end_line": 117, "label": "Routing rules" }]
+    },
+    {
+      "id": "build", "lane": "produce", "col": 4, "type": "backend",
+      "label": "Build assets", "sublabel": "SVG, editorial, Archify",
+      "sources": [{ "path": "skills/beautify-readme/SKILL.md", "line": 174, "end_line": 184, "label": "Visual layer" }]
+    },
+    {
+      "id": "verify", "lane": "gate", "col": 5, "type": "security",
+      "label": "Verify gate", "sublabel": "4 dimensions",
+      "sources": [
+        { "path": "skills/beautify-readme/SKILL.md", "line": 200, "end_line": 216, "label": "Programmatic checks" },
+        { "path": "skills/beautify-readme/SKILL.md", "line": 245, "end_line": 245, "label": "Fail and re-run" }
+      ]
+    },
+    {
+      "id": "handoff", "lane": "you", "col": 5, "type": "frontend",
+      "label": "Preview + diff", "sublabel": "push only on request",
+      "sources": [{ "path": "skills/beautify-readme/SKILL.md", "line": 258, "end_line": 260, "label": "Hand off" }]
+    }
+  ],
+  "edges": [
+    { "id": "request-mode", "from": "request", "to": "mode", "label": "scope", "variant": "emphasis" },
+    { "id": "mode-inspect", "from": "mode", "to": "inspect", "variant": "emphasis" },
+    { "id": "inspect-story", "from": "inspect", "to": "story", "variant": "emphasis" },
+    { "id": "story-route", "from": "story", "to": "route", "label": "mechanisms", "variant": "emphasis" },
+    { "id": "route-build", "from": "route", "to": "build", "label": "engine", "variant": "emphasis" },
+    { "id": "build-verify", "from": "build", "to": "verify", "label": "assets", "variant": "emphasis" },
+    { "id": "verify-handoff", "from": "verify", "to": "handoff", "label": "pass", "variant": "emphasis" },
+    { "id": "verify-fix", "from": "verify", "to": "build", "label": "fail: fix, re-run", "variant": "security", "role": "error" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Production paths",
+      "items": [
+        "Hand SVG for heroes and banners",
+        "Editorial-static for code structure",
+        "Archify for runtime flows",
+        "PlantUML and Vega in Viewer fences"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Verification gate",
+      "items": [
+        "verify_readme.py and audit_readme.py",
+        "Manual four-dimension checklist",
+        "Previews at 900px and 360px"
+      ]
+    }
+  ]
+}
