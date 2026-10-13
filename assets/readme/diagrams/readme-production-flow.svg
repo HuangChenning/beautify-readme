@@ -58,13 +58,13 @@
       <rect x="494" y="130" width="166" height="88" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2"/>
       <text x="514" y="158" fill="#58a6ff" font-size="18" font-weight="700">03</text>
       <text x="514" y="184" fill="#e6edf3" font-size="22" font-weight="700">Inspect repo</text>
-      <text x="514" y="207" fill="#8b949e" font-size="18">README / tree / proof</text>
+      <text x="514" y="207" fill="#8b949e" font-size="18">Repo evidence</text>
     </g>
     <g>
       <rect x="704" y="130" width="172" height="88" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2"/>
       <text x="724" y="158" fill="#58a6ff" font-size="18" font-weight="700">04</text>
       <text x="724" y="184" fill="#e6edf3" font-size="22" font-weight="700">Freeze system</text>
-      <text x="724" y="207" fill="#8b949e" font-size="18">Story / palette / motif</text>
+      <text x="724" y="207" fill="#8b949e" font-size="18">Story + theme</text>
     </g>
   </g>
 
@@ -73,13 +73,13 @@
       <rect x="704" y="352" width="172" height="84" rx="10" fill="#17263a" stroke="#58a6ff" stroke-width="2"/>
       <text x="724" y="380" fill="#58a6ff" font-size="18" font-weight="700">05</text>
       <text x="724" y="406" fill="#e6edf3" font-size="22" font-weight="700">Choose path</text>
-      <text x="724" y="429" fill="#a5d6ff" font-size="18">3 production branches</text>
+      <text x="724" y="429" fill="#a5d6ff" font-size="18">SVG / IR / Viewer</text>
     </g>
     <g>
       <rect x="494" y="352" width="166" height="84" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2"/>
       <text x="514" y="380" fill="#58a6ff" font-size="18" font-weight="700">06</text>
       <text x="514" y="406" fill="#e6edf3" font-size="22" font-weight="700">Build asset</text>
-      <text x="514" y="429" fill="#8b949e" font-size="18">Source + static file</text>
+      <text x="514" y="429" fill="#8b949e" font-size="18">Source + asset</text>
     </g>
     <g>
       <rect x="284" y="352" width="166" height="84" rx="10" fill="#17263a" stroke="#58a6ff" stroke-width="2"/>
