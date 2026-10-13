@@ -2,7 +2,7 @@
      width="1200" height="360" viewBox="0 0 1200 360"
      role="img" aria-labelledby="hero-title hero-desc">
   <title id="hero-title">beautify-readme — Turn any GitHub README into a visual story</title>
-  <desc id="hero-desc">A skill that combines README content architecture, hand-authored SVG, 14 diagram engines, and optional motion to beautify GitHub READMEs in both GitHub-native and Markdown Viewer contexts.</desc>
+  <desc id="hero-desc">A skill that combines README content architecture, hand-authored SVG, source-backed editorial static diagrams, structured diagram engines, and optional motion for GitHub-native and Markdown Viewer contexts.</desc>
 
   <defs>
     <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
@@ -48,22 +48,22 @@
     <g transform="translate(0 178)">
       <rect x="0" y="0" width="96" height="28" rx="14" fill="none" stroke="#58a6ff" stroke-width="1.2"/>
       <text x="48" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="12" fill="#58a6ff" text-anchor="middle">SVG</text>
+            font-size="12" fill="#58a6ff" text-anchor="middle">STATIC</text>
 
       <rect x="108" y="0" width="120" height="28" rx="14" fill="none" stroke="#f78166" stroke-width="1.2"/>
       <text x="168" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="12" fill="#f78166" text-anchor="middle">14 engines</text>
+            font-size="12" fill="#f78166" text-anchor="middle">EVIDENCE</text>
 
       <rect x="240" y="0" width="86" height="28" rx="14" fill="none" stroke="#3fb950" stroke-width="1.2"/>
       <text x="283" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="12" fill="#3fb950" text-anchor="middle">GIF</text>
+            font-size="12" fill="#3fb950" text-anchor="middle">MOTION</text>
     </g>
 
     <!-- Stats -->
     <g transform="translate(0 226)">
       <text x="0" y="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
             font-size="13" fill="#8b949e">
-        9 references · 2 scripts · 2 rendering contexts
+        11 references · 4 scripts · 2 rendering contexts
       </text>
     </g>
   </g>
@@ -73,7 +73,7 @@
     <!-- Section label -->
     <text x="0" y="14" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
           font-size="11" fill="#8b949e" letter-spacing="1.5">
-      DIAGRAM ENGINES
+      DIAGRAM PRODUCTION
     </text>
 
     <!-- Row 1: GitHub-native -->
@@ -85,43 +85,43 @@
       <text x="60" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
             font-size="10" fill="#8b949e" text-anchor="middle">hand-authored</text>
 
-      <!-- PlantUML box -->
+      <!-- Editorial-static box -->
       <rect x="132" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
       <text x="192" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-            font-size="15" font-weight="700" fill="#58a6ff" text-anchor="middle">PlantUML</text>
+            font-size="14" font-weight="700" fill="#58a6ff" text-anchor="middle">Editorial</text>
       <text x="192" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="10" fill="#8b949e" text-anchor="middle">9 domains</text>
+            font-size="10" fill="#8b949e" text-anchor="middle">source-backed</text>
 
-      <!-- Vega box -->
+      <!-- Archify box -->
       <rect x="264" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
       <text x="324" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-            font-size="15" font-weight="700" fill="#58a6ff" text-anchor="middle">Vega</text>
+            font-size="15" font-weight="700" fill="#58a6ff" text-anchor="middle">Archify</text>
       <text x="324" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="10" fill="#8b949e" text-anchor="middle">data charts</text>
+            font-size="10" fill="#8b949e" text-anchor="middle">validated IR</text>
     </g>
 
     <!-- Row 2: Markdown Viewer enhanced -->
     <g transform="translate(0 100)">
-      <!-- Infographic box -->
+      <!-- PlantUML box -->
       <rect x="0" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
       <text x="60" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Infographic</text>
+            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">PlantUML</text>
       <text x="60" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="10" fill="#8b949e" text-anchor="middle">70+ templates</text>
+            font-size="10" fill="#8b949e" text-anchor="middle">domain syntax</text>
 
-      <!-- Architecture box -->
+      <!-- Vega box -->
       <rect x="132" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
       <text x="192" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Architecture</text>
+            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Vega</text>
       <text x="192" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="10" fill="#8b949e" text-anchor="middle">HTML/CSS</text>
+            font-size="10" fill="#8b949e" text-anchor="middle">data charts</text>
 
-      <!-- Infocard box -->
+      <!-- Viewer box -->
       <rect x="264" y="0" width="120" height="56" rx="10" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
       <text x="324" y="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Infocard</text>
+            font-size="14" font-weight="700" fill="#f78166" text-anchor="middle">Viewer</text>
       <text x="324" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-            font-size="10" fill="#8b949e" text-anchor="middle">editorial</text>
+            font-size="10" fill="#8b949e" text-anchor="middle">enhanced</text>
     </g>
 
     <!-- Context labels -->
